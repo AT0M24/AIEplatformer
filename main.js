@@ -38,7 +38,7 @@ tileset.src = "tileset.png";
 
 var cells = [];				// the array that holds our simplified collision data
 function initialize() {
-		for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) { //initialize the collision map
+	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) { //initialize the collision map
 		cells[layerIdx] = [];
 		var idx = 0;
 		for(var y = 0; y < level1.layers[layerIdx].height; y++) {
@@ -47,18 +47,20 @@ function initialize() {
 				if(level1.layers[layerIdx].data[idx] != 0) {
 					// for each tile we find in the layer data, we need to create 4 collisions
 					// (because our collision squares are 35x35 but the tile in the level are 70x70)
-				cells[layerIdx][y][x] = 1;
-				cells[layerIdx][y-1][x] = 1;
-				cells[layerIdx][y-1][x+1] = 1;
-				cells[layerIdx][y][x+1] = 1; 
+					cells[layerIdx][y][x] = 1;
+					cells[layerIdx][y-1][x] = 1;
+					cells[layerIdx][y-1][x+1] = 1;
+					cells[layerIdx][y][x+1] = 1; 
 				}
 				else if(cells[layerIdx][y][x] != 1) {
 					cells[layerIdx][y][x] = 0; 		// if we haven't set this cell's value, then set it to 0 now
+				}
+				idx++;
 			}
-			idx++;
 		}
 	}
 }
+
 // This function will return the time in seconds since the function 
 // was last called
 // You should only call this function once per frame
@@ -80,7 +82,7 @@ function getDeltaTime()
 		deltaTime = 1;
 		
 	return deltaTime;
-}
+};
 
 //-------------------- Don't modify anything above here
 
@@ -132,7 +134,7 @@ function bound(value, min, max)
 	if(value > max)
 		return max;
 	return value;
-}
+};
 
 // load an image to draw
 function drawMap()
@@ -158,7 +160,7 @@ function drawMap()
 	}
  }
  
-}
+};
 
 function run()
 {
@@ -188,7 +190,7 @@ function run()
 	context.fillText("FPS: " + fps, 5, 20, 100);
 	
 	
-}
+};
 
 initialize();
 //-------------------- Don't modify anything below here
