@@ -1,15 +1,21 @@
 var Player = function() { 
 	this.sprite = new Sprite("ChuckNorris.png");
+	
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[0, 1, 2, 3, 4, 5, 6, 7]);
+		
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[8, 9, 10, 11, 12]);
+		
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]);
+		
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[52, 53, 54, 55, 56, 57, 58, 59]);
+		
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[60, 61, 62, 63, 64]);
+		
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78]);
 
@@ -17,7 +23,6 @@ var Player = function() {
 	{
 		this.sprite.setAnimationOffset(i, -55, -87);
 	}
-
 	
 	this.position = new Vector2();
 	this.position.set( 9*TILE, 0*TILE );
@@ -68,11 +73,13 @@ Player.prototype.update = function(deltaTime)
 			this.jumping == false)
 			this.sprite.setAnimation(ANIM_WALK_LEFT);
 	}
-	
-	else if(keyboard.KEY_LEFT == true) {
-	
+	else if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
+		right = true;
+		this.direction = RIGHT;
+		if(this.sprite.currentAnimation != ANIM_WALK_RIGHT &&
+			this.jumping == false)
+			this.sprite.setAnimation(ANIM_WALK_RIGHT);
 	}
-	
 	else {
 		if(this.jumping == false && this.falling == false)
 		{
@@ -89,14 +96,9 @@ Player.prototype.update = function(deltaTime)
 		}
 	}
 	
-	if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
-		right = true;
-		if(this.sprite.currentAnimation != ANIM_WALK_RIGHT &&
-			this.jumping == false)
-			this.sprite.setAnimation(ANIM_WALK_RIGHT);
-	}
 	
-	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
+	
+	if(keyboard.isKeyDown(keyboard.KEY_UP) == true) {
 		jump = true;
 		if(left == true) {
 			this.sprite.setAnimation(ANIM_JUMP_LEFT);
@@ -104,6 +106,11 @@ Player.prototype.update = function(deltaTime)
 		if(right == true) {
 			this.sprite.setAnimation(ANIM_JUMP_RIGHT);
 		}
+	}
+	
+	//if(keyboard.isKeyDown(keyboard.KEY_SPACE) ==true) {
+	//	shoot = true;
+	
 	}
 
 	var wasleft = this.velocity.x < 0;
@@ -198,7 +205,6 @@ Player.prototype.update = function(deltaTime)
 			 }
 		}
 	}
-}
 
 Player.prototype.draw = function()
 {
