@@ -111,7 +111,7 @@ Player.prototype.update = function(deltaTime)
 	//if(keyboard.isKeyDown(keyboard.KEY_SPACE) ==true) {
 	//	shoot = true;
 	
-	}
+
 
 	var wasleft = this.velocity.x < 0;
 	var wasright = this.velocity.x > 0;
@@ -205,7 +205,7 @@ Player.prototype.update = function(deltaTime)
 			 }
 		}
 	}
-
+}
 Player.prototype.draw = function()
 {
  this.sprite.draw(context, this.position.x, this.position.y);
