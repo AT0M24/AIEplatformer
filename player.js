@@ -25,7 +25,7 @@ var Player = function() {
 	}
 	
 	this.position = new Vector2();
-	this.position.set( 9*TILE, 0*TILE );
+	this.position.set( 4*TILE, 0*TILE );
 	
 	this.width = 159;
 	this.height = 163;
