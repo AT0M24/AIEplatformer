@@ -36,7 +36,8 @@ var Player = function() {
 	this.jumping = false;
 
 	this.direction = LEFT;
-
+	
+	this.cooldownTimer = 0;
 };
 
 var sprite;
@@ -108,8 +109,15 @@ Player.prototype.update = function(deltaTime)
 		}
 	}
 	
-	//if(keyboard.isKeyDown(keyboard.KEY_SPACE) ==true) {
-	//	shoot = true;
+	if(this.cooldownTimer > 0)
+	{
+		this.cooldownTimer -= deltaTime;
+	}
+	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0) {
+		sfxFire.play();
+		this.cooldownTimer = 0.3;
+		// Shoot a bullet
+	}
 	
 
 
@@ -208,5 +216,7 @@ Player.prototype.update = function(deltaTime)
 }
 Player.prototype.draw = function()
 {
- this.sprite.draw(context, this.position.x, this.position.y);
+	this.sprite.draw(context,
+		this.position.x - worldOffsetX,
+		this.position.y);
 }

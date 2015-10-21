@@ -44,6 +44,9 @@ var tileset = document.createElement("img");
 tileset.src = "tileset.png";
 
 var cells = [];				// the array that holds our simplified collision data
+
+var musicBackground;
+
 function initialize() {
 	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) { //initialize the collision map
 		cells[layerIdx] = [];
@@ -66,6 +69,25 @@ function initialize() {
 			}
 		}
 	}
+	
+	musicBackground = new Howl(
+	{
+		urls: ["background.ogg"],
+		loop: true,
+		buffer: true,
+		volume: 0.5
+	} );
+	musicBackground.play();
+	
+	sfxFire = new Howl(
+	{
+		urls: ["fireEffect.ogg"],
+		buffer: true,
+		volume: 1,
+		onend: function() {
+			isSfxPlaying = false;
+		}
+	} );
 }
 
 // This function will return the time in seconds since the function 
@@ -143,7 +165,8 @@ function bound(value, min, max)
 	return value;
 };
 
-// load an image to draw
+var worldOffsetX = 0;
+
 function drawMap()
 {
 	var maxTiles = Math.floor(SCREEN_WIDTH / TILE) + 2;
@@ -193,14 +216,12 @@ function run()
 {
 	context.fillStyle = "#ccc";		
 	context.fillRect(0, 0, canvas.width, canvas.height);
-	
-	drawMap ();
-	
+		
 	var deltaTime = getDeltaTime();
 	
 	player.update(deltaTime);
 	player.draw();
-
+	drawMap ();
 	// update the frame counter 
 	fpsTime += deltaTime;
 	fpsCount++;
